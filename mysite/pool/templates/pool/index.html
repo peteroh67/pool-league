@@ -2,15 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>NOC Pool</title>
+        <title>NOC Pool League</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'pool/styles.css' %}">
     </head>
     <body>
-        <h1>NOC Pool</h1>
-        <ul>
-            <li><a href="/pool/leaguetable/">Pool League table</a></li>
-            <li><a href="/pool/players/">All players</a></li>
-            <li><a href="/pool/games/">Games</a></li>
-        </ul>
-
+        <div class="container">
+            <h1>NOC Pool League</h1>
+            <div class="button-links">
+                <a href="{% url 'leaguetable' %}" class="button">League Table</a>
+                <a href="{% url 'games' %}" class="button">All Games</a>
+            </div>
+        </div>
     </body>
 </html>

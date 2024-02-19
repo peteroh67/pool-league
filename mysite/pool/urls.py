@@ -3,8 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('league_table/', views.league_table, name='league_table'),
+    path('leaguetable/', views.leaguetable, name='leaguetable'),
     path('games/', views.games, name='games'),
-    path('players/', views.players, name='players'),
-    path('<int:player_id>/player/', views.player, name='player')
+    path('games/<int:month>/', views.games, name='games_by_month')
 ]

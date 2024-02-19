@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Game
+from datetime import datetime
 
 def index(request):
     return render(request, "pool/index.html")
@@ -8,16 +9,15 @@ def index(request):
 def add_game(request):
     return HttpResponse("Add a game of pool")
 
-def league_table(request, start_date, end_date):
+def leaguetable(request, month=None):
     return render(request, "pool/leaguetable.html")
 
-def games(request):
-    latest_games_list = Game.objects.order_by("game_date")[:20]
-    context = {"latest_games_list": latest_games_list}
+# Returns a view of all games in a specified month. Returns all games in the current month by default
+def games(request, month=None):
+    if month is None:
+        month = datetime.now().month
+
+    games_in_month = Game.objects.filter(game_date__month=month).order_by("game_date")
+    context = {"latest_games_list": games_in_month}
+
     return render(request, "pool/games.html", context)
-
-def player(request, player_id):
-    return HttpResponse(f"Viewing player {player_id}")
-
-def players(request):
-    return render(request, "pool/players.html")
