@@ -18,6 +18,6 @@ def games(request, month=None):
         month = datetime.now().month
 
     games_in_month = Game.objects.filter(game_date__month=month).order_by("game_date")
-    context = {"latest_games_list": games_in_month}
+    context = {"games_list": games_in_month}
 
     return render(request, "pool/games.html", context)

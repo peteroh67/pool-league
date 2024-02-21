@@ -2,19 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Games</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
 </head>
-<body>
-    <h1>Latest Games</h1>
-        {% if latest_games_list %}
-        <ul>
-            {% for game in latest_games_list %}
-            <li>{{ game }}</li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No games found.</p>
-        {% endif %}
+    <body>
+        <div class="container">
+            {% if games_list %}
 
+            {% with games_list.0.game_date|date:"F" as month_name %}
+
+            <h1>Games in {{ month_name }}</h1>
+            {% endwith %}
+            <div class="game_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player 1</th>
+                            <th>Player 2</th>
+                            <th>Winner</th>
+                            <th>Day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in games_list %}
+                        <tr>
+                            <td>{{ game.player_1 }}</td>
+                            <td>{{ game.player_2 }}</td>
+                            <td>{{ game.winner }}</td>
+                            <td>{{ game.game_date|date:"d" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h1>No games played in this month</h1>
+            {% endif %}
+        </div>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
