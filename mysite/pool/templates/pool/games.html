@@ -9,12 +9,20 @@
     <body>
         <div class="container">
             {% if games_list %}
+            <select id="player-select">
+                <option value="">Select a player</option>
+                <!-- Populate options dynamically with player names -->
+                {% for player in players %}
+                <option value="{{ player }}">{{ player }}</option>
+                {% endfor %}
+            </select>
+            <button class="button" id="filter-button">Filter</button>
 
             {% with games_list.0.game_date|date:"F" as month_name %}
 
             <h1>Games in {{ month_name }}</h1>
             {% endwith %}
-            <div class="game_table">
+            <div id="game-table">
                 <table>
                     <thead>
                         <tr>
@@ -40,6 +48,6 @@
             <h1>No games played in this month</h1>
             {% endif %}
         </div>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'pool/js/script.js' %}"></script>
 </body>
 </html>
