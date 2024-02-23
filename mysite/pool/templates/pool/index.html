@@ -4,14 +4,17 @@
         <meta charset="UTF-8">
         <title>NOC Pool League</title>
         {% load static %}
+        <link rel="shortcut icon" type="image/png" href="{% static 'pool/img/pool.ico' %}"/>
         <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
     </head>
     <body>
         <div class="container">
             <h1>NOC Pool League</h1>
             <div class="button-links">
-                <a href="{% url 'leaguetable' %}" class="button">League Table</a>
+                <a href="{% url 'league_table' %}" class="button">League Table</a>
                 <a href="{% url 'games' %}" class="button">All Games</a>
+                <a href="{% url 'add_games' %}" class="button">Add Games</a>
+                <a href="{% url 'add_players' %}" class="button">Add Players</a>
             </div>
         </div>
     </body>

@@ -6,9 +6,6 @@ from datetime import datetime
 def index(request):
     return render(request, "pool/index.html")
 
-def add_game(request):
-    return HttpResponse("Add a game of pool")
-
 def leaguetable(request, month=None):
     return render(request, "pool/leaguetable.html")
 
@@ -25,3 +22,10 @@ def games(request, month=None):
                }
 
     return render(request, "pool/games.html", context)
+
+def add_game(request):
+    return HttpResponse("Add a game of pool")
+
+def add_player(request):
+    return HttpResponse("Add a pool player")
+

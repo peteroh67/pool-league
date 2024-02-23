@@ -63,3 +63,18 @@ th {
     background-color: #D8C3A5;
     color: #E98074;
 }
+
+.player-select {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    color: #E85A4F;
+    background-color: #D8C3A5;
+    border: 2px solid #E85A4F;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s;
+}
