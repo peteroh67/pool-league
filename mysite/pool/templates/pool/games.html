@@ -9,6 +9,8 @@
 </head>
     <body>
         <div class="container">
+            <button class="button" id="prev-month-button">&lt;</button>
+
             {% if games_list %}
             <select id="player-select-1" class="player-select">
                 <option value="">Select player 1</option>
@@ -28,6 +30,8 @@
             <button class="button" id="filter-button">Go</button>
 
             {% with games_list.0.game_date|date:"F" as month_name %}
+
+            <button class="button" id="next-month-button">&gt;</button>
 
             <h1>Games in {{ month_name }}</h1>
             {% endwith %}

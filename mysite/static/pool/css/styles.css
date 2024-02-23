@@ -78,3 +78,15 @@ th {
     text-align: center;
     transition: background-color 0.3s, border-color 0.3s;
 }
+
+.button-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.arrow-button[disabled] {
+    opacity: 0.5; /* Gray out disabled button */
+    cursor: not-allowed; /* Disable cursor for disabled button */
+}
