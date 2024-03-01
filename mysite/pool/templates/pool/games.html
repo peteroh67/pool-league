@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Games</title>
+    <title>NOC Pool</title>
     {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% static 'pool/img/pool.ico' %}"/>
     <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
 </head>
     <body>
         <div class="container">
-            <button class="button" id="prev-month-button">&lt;</button>
 
-            {% if games_list %}
+            <a href="/pool/games/1/" class="button" id="prev-month">&lt;</a>
+
             <select id="player-select-1" class="player-select">
                 <option value="">Select player 1</option>
                 <!-- Populate options dynamically with player names -->
@@ -29,12 +29,14 @@
             </select>
             <button class="button" id="filter-button">Go</button>
 
+            <a href="#" class="button" id="next-month-button">&gt;</a>
+
+            {% if games_list %}
+
             {% with games_list.0.game_date|date:"F" as month_name %}
-
-            <button class="button" id="next-month-button">&gt;</button>
-
-            <h1>Games in {{ month_name }}</h1>
+            <h1>{{ month_name }} Games</h1>
             {% endwith %}
+
             <div id="game-table">
                 <table>
                     <thead>

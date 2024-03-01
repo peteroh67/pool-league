@@ -20,7 +20,7 @@ end_date = timezone.now()  # End date is today
 current_date = start_date
 while current_date <= end_date:
     # Generate 5 random games for each day
-    for _ in range(5):
+    for i in range(5):
         # Choose random players for player 1 and player 2
         player_1 = random.choice(players)
         player_2 = random.choice(players)

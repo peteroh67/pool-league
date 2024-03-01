@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>NOC Pool</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'pool/img/pool.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
 </head>
 <body>
+        <div class="container">
+
+        {% with games_list.0.game_date|date:"F" as month_name %}
+        <h1>League Table</h1>
+        {% endwith %}
+        <table id="league-table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Number of Games</th>
+                    <th>Number of Wins</th>
+                    <th>Win Rate (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player, stats in player_stats.items %}
+                <tr>
+                    <td>{{ player }}</td>
+                    <td>{{ stats.0 }}</td> <!-- Number of games played -->
+                    <td>{{ stats.1 }}</td> <!-- Number of wins -->
+                    <td class="win-rate"></td> <!-- Win rate will be calculated dynamically -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
