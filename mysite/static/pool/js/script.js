@@ -1,11 +1,31 @@
-// change url to the previous month when previous-month button is clicked
+function changeMonth(direction) {
+    let currentMonth = window.location.pathname.split("/")[3];
+    let newMonth;
+
+    if (direction === 'prev') {
+        newMonth = (parseInt(currentMonth, 10) - 1).toString().padStart(2, '0');
+        if (newMonth === '00') {
+            newMonth = '12'; // December
+        }
+    } else if (direction === 'next') {
+        newMonth = (parseInt(currentMonth, 10) + 1).toString().padStart(2, '0');
+        if (newMonth === '13') {
+            newMonth = '01'; // January
+        }
+    }
+
+    window.location.href = '/pool/games/' + newMonth + '/';
+}
+
 document.getElementById('prev-month').addEventListener('click', () => {
-
-
-
+    changeMonth('prev');
 });
 
-// used to filter the games depending on inout from user
+document.getElementById('next-month').addEventListener('click', () => {
+    changeMonth('next');
+});
+
+// used to filter the games depending on input from user
 const playerSelect1 = document.getElementById('player-select-1');
 const playerSelect2 = document.getElementById('player-select-2');
 const filterButton = document.getElementById('filter-button');
