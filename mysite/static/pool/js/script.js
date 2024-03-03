@@ -1,4 +1,5 @@
-function changeMonth(direction) {
+// change to previous or next month when the associated button is pressed. works for both games and league table
+function changeMonth(direction, view) {
     let currentMonth = window.location.pathname.split("/")[3];
     let newMonth;
 
@@ -14,31 +15,55 @@ function changeMonth(direction) {
         }
     }
 
-    window.location.href = '/pool/games/' + newMonth + '/';
+    let baseUrl = '/pool/';
+    let newUrl = '';
+
+    if (view === 'games') {
+        newUrl = `${baseUrl}games/${newMonth}/`;
+    } else if (view === 'leaguetable') {
+        newUrl = `${baseUrl}leaguetable/${newMonth}/`;
+    }
+    window.location.href = newUrl;
+};
+
+prevMonthGames = document.getElementById('prev-month-games');
+
+if (prevMonthGames) {
+    prevMonthGames.addEventListener('click', () => {
+        changeMonth('prev', 'games');
+    });
 }
 
-document.getElementById('prev-month').addEventListener('click', () => {
-    changeMonth('prev');
-});
+nextMonthGames = document.getElementById('next-month-games');
 
-document.getElementById('next-month').addEventListener('click', () => {
-    changeMonth('next');
-});
+if (nextMonthGames) {
+    nextMonthGames.addEventListener('click', () => {
+        changeMonth('next', 'games');
+    });
+}
 
-// used to filter the games depending on input from user
-const playerSelect1 = document.getElementById('player-select-1');
-const playerSelect2 = document.getElementById('player-select-2');
-const filterButton = document.getElementById('filter-button');
+prevMonthLeague = document.getElementById('prev-month-league-table')
 
-filterButton.addEventListener('click', () => {
-    const p1 = playerSelect1.value;
-    const p2 = playerSelect2.value;
-    filterTable(p1, p2);
-});
+if (prevMonthLeague) {
+    prevMonthLeague.addEventListener('click', () => {
+        changeMonth('prev', 'leaguetable');
+    });
+}
+
+nextMonthLeague = document.getElementById('next-month-league-table');
+
+if (nextMonthLeague) {
+    nextMonthLeague.addEventListener('click', () => {
+        changeMonth('next', 'leaguetable');
+    });
+}
 
 // filter games table
 function filterTable(selectedPlayer1, selectedPlayer2) {
+
+    console.log("Filter table");
     const tableRows = document.querySelectorAll('#game-table table tbody tr');
+
     tableRows.forEach(row => {
         const gamePlayer1 = row.cells[0].innerText;
         const gamePlayer2 = row.cells[1].innerText;
@@ -50,8 +75,9 @@ function filterTable(selectedPlayer1, selectedPlayer2) {
     });
 }
 
-// Returns true if the selected players match the rows players.
+// Returns true if the selected player(s) match the rows players.
 function matchesPlayers(gamePlayer1, gamePlayer2, selectedPlayer1, selectedPlayer2) {
+    console.log("match player to games");
     if (selectedPlayer1 && selectedPlayer2) {
         // Both players are selected
         return (gamePlayer1 === selectedPlayer1 && gamePlayer2 === selectedPlayer2) ||
@@ -67,3 +93,23 @@ function matchesPlayers(gamePlayer1, gamePlayer2, selectedPlayer1, selectedPlaye
         return false;
     }
 }
+
+// used to filter the games depending on input from user
+const playerSelect1 = document.getElementById('player-select-1');
+const playerSelect2 = document.getElementById('player-select-2');
+
+filterButton = document.getElementById('filter-button');
+
+if (filterButton) {
+    filterButton.addEventListener('click', function() {
+        console.log(playerSelect1);
+        console.log(playerSelect1.value);
+
+        const p1 = playerSelect1.value;
+        const p2 = playerSelect2.value;
+        console.log("event listener filter");
+        filterTable(p1, p2);
+    });
+}
+
+
