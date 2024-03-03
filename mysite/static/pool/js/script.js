@@ -61,7 +61,6 @@ if (nextMonthLeague) {
 // filter games table
 function filterTable(selectedPlayer1, selectedPlayer2) {
 
-    console.log("Filter table");
     const tableRows = document.querySelectorAll('#game-table table tbody tr');
 
     tableRows.forEach(row => {
@@ -77,7 +76,7 @@ function filterTable(selectedPlayer1, selectedPlayer2) {
 
 // Returns true if the selected player(s) match the rows players.
 function matchesPlayers(gamePlayer1, gamePlayer2, selectedPlayer1, selectedPlayer2) {
-    console.log("match player to games");
+
     if (selectedPlayer1 && selectedPlayer2) {
         // Both players are selected
         return (gamePlayer1 === selectedPlayer1 && gamePlayer2 === selectedPlayer2) ||
@@ -102,12 +101,9 @@ filterButton = document.getElementById('filter-button');
 
 if (filterButton) {
     filterButton.addEventListener('click', function() {
-        console.log(playerSelect1);
-        console.log(playerSelect1.value);
 
         const p1 = playerSelect1.value;
         const p2 = playerSelect2.value;
-        console.log("event listener filter");
         filterTable(p1, p2);
     });
 }

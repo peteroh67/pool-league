@@ -1,68 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>NOC Pool</title>
-    {% load static %}
-    <link rel="shortcut icon" type="image/png" href="{% static 'pool/img/pool.ico' %}"/>
-    <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
-</head>
-    <body>
-        <div class="container">
+{% extends "./index.html" %}
 
-            <button class="button" id="prev-month-games">&lt;</button>
+{% block userelements %}
+<button class="button" id="prev-month-games">&lt;</button>
 
-            <select id="player-select-1" class="player-select">
-                <option value="">Select player 1</option>
-                <!-- Populate options dynamically with player names -->
-                {% for player in players %}
-                <option value="{{ player }}">{{ player }}</option>
-                {% endfor %}
-            </select>
+<select id="player-select-1" class="player-select">
+    <option value="">Select player 1</option>
+    <!-- Populate options dynamically with player names -->
+    {% for player in players %}
+    <option value="{{ player }}">{{ player }}</option>
+    {% endfor %}
+</select>
 
-            <select id="player-select-2" class="player-select">
-                <option value="">Select player 2</option>
-                <!-- Populate options dynamically with player names -->
-                {% for player in players %}
-                <option value="{{ player }}">{{ player }}</option>
-                {% endfor %}
-            </select>
-            <button class="button" id="filter-button">Go</button>
+<select id="player-select-2" class="player-select">
+    <option value="">Select player 2</option>
+    <!-- Populate options dynamically with player names -->
+    {% for player in players %}
+    <option value="{{ player }}">{{ player }}</option>
+    {% endfor %}
+</select>
 
-            <button class="button" id="next-month-games">&gt;</button>
+<button class="button" id="filter-button">Go</button>
 
-            {% if games_list %}
+<button class="button" id="next-month-games">&gt;</button>
+{% endblock %}
 
-            {% with games_list.0.game_date|date:"F" as month_name %}
-            <h1>{{ month_name }} Games</h1>
-            {% endwith %}
+{% block title %}
+{% if games_list %}
+{% with games_list.0.game_date|date:"F" as month_name %}
+<h1>{{ month_name }} Games</h1>
+{% endwith %}
+{% endif %}
+{% endblock %}
 
-            <div id="game-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Player 1</th>
-                            <th>Player 2</th>
-                            <th>Winner</th>
-                            <th>Day</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for game in games_list %}
-                        <tr>
-                            <td>{{ game.player_1 }}</td>
-                            <td>{{ game.player_2 }}</td>
-                            <td>{{ game.winner }}</td>
-                            <td>{{ game.game_date|date:"d" }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% else %}
-            <h1>No games played in this month</h1>
-            {% endif %}
-        </div>
-    <script src="{% static 'pool/js/script.js' %}"></script>
-</body>
-</html>
+
+{% block maincontent %}
+{% if games_list %}
+<div id="game-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Player 1</th>
+                <th>Player 2</th>
+                <th>Winner</th>
+                <th>Day</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games_list %}
+            <tr>
+                <td>{{ game.player_1 }}</td>
+                <td>{{ game.player_2 }}</td>
+                <td>{{ game.winner }}</td>
+                <td>{{ game.game_date|date:"d" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<h1>No games played in this month</h1>
+{% endif %}
+{% endblock %}

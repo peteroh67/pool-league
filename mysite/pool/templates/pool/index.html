@@ -6,16 +6,32 @@
         {% load static %}
         <link rel="shortcut icon" type="image/png" href="{% static 'pool/img/pool.ico' %}"/>
         <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div class="container">
-            <h1>NOC Pool League</h1>
+            <div class="header">
+                <a href="/pool/" class="w3-xxxlarge"><i class="fa fa-home"></i></a>
+            </div>
+
+            <div class="user-elements">
+                {% block userelements %}
+
+                {% endblock %}
+             </div>
+
+            {% block title %}<h1>NOC Pool League</h1>{% endblock %}
+
+
+            {% block maincontent %}
             <div class="button-links">
                 <a href="{{ league_url }}" class="button">League Table</a>
                 <a href="{{ games_url }}" class="button">All Games</a>
                 <a href="{% url 'add_games' %}" class="button">Add Games</a>
                 <a href="{% url 'add_players' %}" class="button">Add Players</a>
             </div>
-        </div>
+            {% endblock %}
+       </div>
+    <script src="{% static 'pool/js/script.js' %}"></script>
     </body>
 </html>

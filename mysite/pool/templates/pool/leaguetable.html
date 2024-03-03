@@ -1,41 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>NOC Pool</title>
-    {% load static %}
-    <link rel="shortcut icon" type="image/png" href="{% static 'pool/img/pool.ico' %}"/>
-    <link rel="stylesheet" href="{% static 'pool/css/styles.css' %}">
-</head>
-    <body>
-        <div class="container">
+{% extends "./index.html" %}
 
-            <button class="button" id="prev-month-league-table"><</button>
-            <button class="button" id="next-month-league-table">></button>
+{% block userelements %}
+<button class="button" id="prev-month-league-table"><</button>
+<button class="button" id="next-month-league-table">></button>
+{% endblock %}
 
-            <h1>{{ month_str }} League Table</h1>
+{% block title %}
+<h1>{{ month_str }} League Table</h1>
+{% endblock %}
 
-            <table id="league-table">
-                <thead>
-                    <tr>
-                        <th>Player</th>
-                        <th>Number of Games</th>
-                        <th>Number of Wins</th>
-                        <th>Win Rate (%)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for player in players_stats %}
-                    <tr>
-                        <td>{{ player.0 }}</td>
-                        <td>{{ player.1 }}</td> <!-- Number of games played -->
-                        <td>{{ player.2 }}</td> <!-- Number of wins -->
-                        <td>{{ player.3 }}</td> <!-- Win rate  -->
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    <script src="{% static 'pool/js/script.js' %}"></script>
-</body>
-</html>
+{% block maincontent %}
+<table id="league-table">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Number of Games</th>
+            <th>Number of Wins</th>
+            <th>Win Rate (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players_stats %}
+        <tr>
+            <td>{{ player.0 }}</td>
+            <td>{{ player.1 }}</td> <!-- Number of games played -->
+            <td>{{ player.2 }}</td> <!-- Number of wins -->
+            <td>{{ player.3 }}</td> <!-- Win rate  -->
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
