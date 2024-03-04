@@ -1,0 +1,26 @@
+{% extends "./index.html" %}
+
+{% block title %}<h1>Add Players</h1>{% endblock %}
+
+{% block maincontent %}
+<div class="two-columns">
+    <!-- Left Column: Existing Players List -->
+    <div class="column">
+        <h2>Players</h2>
+        <ul id="players-list">
+            <!-- Populate with existing players -->
+            {% for player in players %}
+            <li>{{ player }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- Right Column: Form to Add New Players -->
+    <div class="column">
+        <h2>Add New Player</h2>
+        <form id="add-player-form">
+            <input type="text" id="new-player-name" placeholder="Enter new player name">
+            <button class="button" type="submit">Add Player</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

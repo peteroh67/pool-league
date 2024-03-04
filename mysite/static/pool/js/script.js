@@ -1,5 +1,5 @@
 // change to previous or next month when the associated button is pressed. works for both games and league table
-function changeMonth(direction, view) {
+function changeMonth(direction) {
     let currentMonth = window.location.pathname.split("/")[3];
     let newMonth;
 
@@ -15,51 +15,30 @@ function changeMonth(direction, view) {
         }
     }
 
-    let baseUrl = '/pool/';
-    let newUrl = '';
+    let baseUrlTokens = window.location.pathname.split("/");
+    let newUrl = `/${baseUrlTokens[1]}/${baseUrlTokens[2]}/${newMonth}/`
 
-    if (view === 'games') {
-        newUrl = `${baseUrl}games/${newMonth}/`;
-    } else if (view === 'leaguetable') {
-        newUrl = `${baseUrl}leaguetable/${newMonth}/`;
-    }
     window.location.href = newUrl;
 };
 
-prevMonthGames = document.getElementById('prev-month-games');
+prevMonth = document.getElementById('prev-month');
 
-if (prevMonthGames) {
-    prevMonthGames.addEventListener('click', () => {
-        changeMonth('prev', 'games');
+if (prevMonth) {
+    prevMonth.addEventListener('click', () => {
+        changeMonth('prev');
     });
 }
 
-nextMonthGames = document.getElementById('next-month-games');
+nextMonth = document.getElementById('next-month');
 
-if (nextMonthGames) {
-    nextMonthGames.addEventListener('click', () => {
-        changeMonth('next', 'games');
-    });
-}
-
-prevMonthLeague = document.getElementById('prev-month-league-table')
-
-if (prevMonthLeague) {
-    prevMonthLeague.addEventListener('click', () => {
-        changeMonth('prev', 'leaguetable');
-    });
-}
-
-nextMonthLeague = document.getElementById('next-month-league-table');
-
-if (nextMonthLeague) {
-    nextMonthLeague.addEventListener('click', () => {
-        changeMonth('next', 'leaguetable');
+if (nextMonth) {
+    nextMonth.addEventListener('click', () => {
+        changeMonth('next');
     });
 }
 
 // filter games table
-function filterTable(selectedPlayer1, selectedPlayer2) {
+function filterGamesTable(selectedPlayer1, selectedPlayer2) {
 
     const tableRows = document.querySelectorAll('#game-table table tbody tr');
 
@@ -74,7 +53,7 @@ function filterTable(selectedPlayer1, selectedPlayer2) {
     });
 }
 
-// Returns true if the selected player(s) match the rows players.
+// Returns true if the selected player(s) match the rows players. Used by filterGamesTable()
 function matchesPlayers(gamePlayer1, gamePlayer2, selectedPlayer1, selectedPlayer2) {
 
     if (selectedPlayer1 && selectedPlayer2) {
@@ -104,7 +83,7 @@ if (filterButton) {
 
         const p1 = playerSelect1.value;
         const p2 = playerSelect2.value;
-        filterTable(p1, p2);
+        filterGamesTable(p1, p2);
     });
 }
 

@@ -17,44 +17,31 @@ def index(request):
 
     return render(request, "pool/index.html", context)
 
-def leaguetable(request, month):
+def league_table(request, month):
 
     games_in_month = Game.objects.filter(game_date__month=month)
     players = Player.objects.all()
 
-    context = {
-                "month_str": calendar.month_name[month],
-               }
-    playerStatList = []
-    for player in players:
-        stats = get_player_stats(player, games_in_month)
-        playerStatList.append(stats)
+    player_stats = [get_player_stats(player, games_in_month) for player in players]
 
-    # sort by win rate with the highest at the top of the table
-    playerStatList = sorted(playerStatList, key=lambda x: x[3], reverse=True)
-    context["players_stats"] = playerStatList
+    # Sort by win rate with the highest at the top of the table
+    player_stats = sorted(player_stats, key=lambda x: x[3], reverse=True)
+
+    context = {
+        "month_str": calendar.month_name[month],
+        "players_stats": player_stats
+    }
 
     return render(request, "pool/leaguetable.html", context)
 
-# return player stats where [1] == games played, [2] == wins, [3] == win rate
 def get_player_stats(player, games):
-    playerStats = [player.name, 0, 0, 0]
+    total_games = sum(1 for game in games if player in [game.player_1, game.player_2])
+    wins = sum(1 for game in games if game.winner == player)
 
-    for game in games:
-        if game.player_1 == player or game.player_2 == player:
-            playerStats[1] += 1
+    win_rate = (wins / total_games) * 100 if total_games > 0 else 0
+    win_rate = round(win_rate)
 
-            if game.winner == player:
-                playerStats[2] += 1
-
-    if playerStats[2] == 0:
-        win_rate = 0
-    else:
-        win_rate = (playerStats[2] / playerStats[1]) * 100
-
-    playerStats[3] = round(win_rate)
-
-    return playerStats
+    return [player.name, total_games, wins, win_rate]
 
 
 # Returns a view of all games in a specified month. Returns all games in the current month by default
@@ -71,9 +58,10 @@ def games(request, month=None):
 
     return render(request, "pool/games.html", context)
 
-def add_game(request):
+def add_games(request):
     return HttpResponse("Add a game of pool")
 
-def add_player(request):
-    return HttpResponse("Add a pool player")
+def add_players(request):
+    players = Player.objects.all()
+    return render(request,"pool/addplayers.html", {"players": players})
 

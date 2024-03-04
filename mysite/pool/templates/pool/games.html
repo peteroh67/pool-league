@@ -1,9 +1,9 @@
 {% extends "./index.html" %}
 
 {% block userelements %}
-<button class="button" id="prev-month-games">&lt;</button>
+<button class="button" id="prev-month">&lt;</button>
 
-<select id="player-select-1" class="player-select">
+<select id="player-select-1" class="button player-select">
     <option value="">Select player 1</option>
     <!-- Populate options dynamically with player names -->
     {% for player in players %}
@@ -11,7 +11,7 @@
     {% endfor %}
 </select>
 
-<select id="player-select-2" class="player-select">
+<select id="player-select-2" class="button player-select">
     <option value="">Select player 2</option>
     <!-- Populate options dynamically with player names -->
     {% for player in players %}
@@ -21,7 +21,7 @@
 
 <button class="button" id="filter-button">Go</button>
 
-<button class="button" id="next-month-games">&gt;</button>
+<button class="button" id="next-month">&gt;</button>
 {% endblock %}
 
 {% block title %}

@@ -9,10 +9,7 @@ body {
 .container {
     text-align: center;
     margin-top: 100px;
-}
-
-.header {
-    flex: column;
+    padding: 0px 200px;
 }
 
 h1 {
@@ -27,25 +24,22 @@ h1 {
     align-items: center;
 }
 
-a {
-    color: #E85A4F; /* Text color for links */
-}
-
 table {
-    width: 80%; /* Set the width of the table */
-    margin: 0 auto; /* Center the table horizontally */
-    border-collapse: collapse; /* Collapse table borders */
-    border: 2px solid #E85A4F; /* Border color for the table */
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 2px solid #E85A4F;
 }
 
 th, td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #E85A4F; /* Border color for table rows */
+    border-bottom: 2px solid #E85A4F;
 }
 
 th {
-    background-color: #EAE7DC; /* Background color for table header */
+    background-color: #E98074;
+    color: #EAE7DC;
 }
 
 .button {
@@ -61,6 +55,11 @@ th {
     width: 200px;
     text-align: center;
     transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+}
+
+.fa {
+    color: #E85A4F;
 }
 
 .button:hover {
@@ -69,17 +68,7 @@ th {
 }
 
 .player-select {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    text-decoration: none;
-    color: #E85A4F;
     background-color: #D8C3A5;
-    border: 2px solid #E85A4F;
-    border-radius: 5px;
-    font-size: 18px;
-    width: 200px;
-    text-align: center;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
@@ -89,8 +78,18 @@ th {
     justify-content: center;
 }
 
+.two-columns {
+    display: flex;
+    border: 2px solid #E85A4F;
+    border-radius: 5px;
+}
 
-.arrow-button[disabled] {
-    opacity: 0.5; /* Gray out disabled button */
-    cursor: not-allowed; /* Disable cursor for disabled button */
+.column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
 }
