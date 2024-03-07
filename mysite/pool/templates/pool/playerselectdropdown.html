@@ -1,0 +1,7 @@
+<select id="{{ select_id }}" class="button player-select">
+    <option value="">Select player 1</option>
+    <!-- Populate options dynamically with player names -->
+    {% for player in players %}
+    <option value="{{ player }}">{{ player }}</option>
+    {% endfor %}
+</select>

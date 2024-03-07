@@ -1,0 +1,16 @@
+{% extends "./index.html" %}
+
+{% block title %}<h1>Add Games</h1>{% endblock %}
+
+{% block maincontent %}
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <input type="radio" name="winner" id="player-1" value="{{ player.name }}">
+        {% include './playerselectdropdown.html' with select_id='player-select-1' %}
+        {% include './playerselectdropdown.html' with select_id='player-select-2' %}
+        <input type="radio" name="winner" id="player-2" value="{{ player.name }}">
+    </fieldset>
+<input type="submit" value="Add Game" class="button">
+</form>
+{% endblock %}

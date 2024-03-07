@@ -33,13 +33,18 @@ table {
 
 th, td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
     border-bottom: 2px solid #E85A4F;
 }
 
 th {
     background-color: #E98074;
     color: #EAE7DC;
+}
+
+th:nth-child(1), td:nth-child(1), th:nth-child(2), td:nth-child(2),
+th:nth-child(3), td:nth-child(3) th:nth-child(4), td:nth-child(4){
+    width: 25%; /* Adjust the width as needed */
 }
 
 .button {
@@ -80,7 +85,7 @@ th {
 
 .two-columns {
     display: flex;
-    border: 2px solid #E85A4F;
+    border: 0;
     border-radius: 5px;
 }
 
@@ -92,4 +97,9 @@ th {
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+fieldset {
+    border: 0;
+    margin: 10px;
 }

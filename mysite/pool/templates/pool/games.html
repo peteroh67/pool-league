@@ -3,21 +3,8 @@
 {% block userelements %}
 <button class="button" id="prev-month">&lt;</button>
 
-<select id="player-select-1" class="button player-select">
-    <option value="">Select player 1</option>
-    <!-- Populate options dynamically with player names -->
-    {% for player in players %}
-    <option value="{{ player }}">{{ player }}</option>
-    {% endfor %}
-</select>
-
-<select id="player-select-2" class="button player-select">
-    <option value="">Select player 2</option>
-    <!-- Populate options dynamically with player names -->
-    {% for player in players %}
-    <option value="{{ player }}">{{ player }}</option>
-    {% endfor %}
-</select>
+{% include './playerselectdropdown.html' with select_id='player-select-1' %}
+{% include './playerselectdropdown.html' with select_id='player-select-2' %}
 
 <button class="button" id="filter-button">Go</button>
 

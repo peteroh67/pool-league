@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Game, Player
 from datetime import datetime
 import calendar
+from .forms import PlayerForm
 
 def index(request):
     current_month = datetime.now().strftime('%m')
@@ -46,8 +47,6 @@ def get_player_stats(player, games):
 
 # Returns a view of all games in a specified month. Returns all games in the current month by default
 def games(request, month=None):
-    if month is None:
-        month = datetime.now().month
 
     games_in_month = Game.objects.filter(game_date__month=month).order_by("-game_date")
     players = Player.objects.all()
@@ -59,9 +58,25 @@ def games(request, month=None):
     return render(request, "pool/games.html", context)
 
 def add_games(request):
-    return HttpResponse("Add a game of pool")
+    players = Player.objects.all()
+    return render(request, "pool/addgames.html", {"players": players})
 
 def add_players(request):
     players = Player.objects.all()
-    return render(request,"pool/addplayers.html", {"players": players})
+
+    if request.method == "POST":
+        form = PlayerForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = PlayerForm()
+
+    context = {
+        "players": players,
+        "form": form
+    }
+
+    return render(request,"pool/addplayers.html", context)
 

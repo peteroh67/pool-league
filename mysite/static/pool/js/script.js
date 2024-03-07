@@ -76,7 +76,7 @@ function matchesPlayers(gamePlayer1, gamePlayer2, selectedPlayer1, selectedPlaye
 const playerSelect1 = document.getElementById('player-select-1');
 const playerSelect2 = document.getElementById('player-select-2');
 
-filterButton = document.getElementById('filter-button');
+const filterButton = document.getElementById('filter-button');
 
 if (filterButton) {
     filterButton.addEventListener('click', function() {
