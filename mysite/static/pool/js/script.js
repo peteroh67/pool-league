@@ -86,5 +86,3 @@ if (filterButton) {
         filterGamesTable(p1, p2);
     });
 }
-
-

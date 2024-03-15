@@ -94,6 +94,10 @@ th:nth-child(3), td:nth-child(3) th:nth-child(4), td:nth-child(4){
     margin: 0 10px;
 }
 
+.form{
+    margin: 20px;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -103,3 +107,4 @@ fieldset {
     border: 0;
     margin: 10px;
 }
+

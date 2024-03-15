@@ -17,7 +17,7 @@
     <!-- Right Column: Form to Add New Players -->
     <div class="column">
         <h2>Add New Player</h2>
-        <form action="{% url 'add_players' %}" id="add-player-form" method="post">
+        <form action="{% url 'add_players' %}" method="post">
             {% csrf_token %}
             {{ form }}
             <input class="button" type="submit" value="Add Player">

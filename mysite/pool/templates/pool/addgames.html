@@ -3,14 +3,21 @@
 {% block title %}<h1>Add Games</h1>{% endblock %}
 
 {% block maincontent %}
-<form method="post">
+<form method="post" action="{% url 'add_games' %}" >
     {% csrf_token %}
-    <fieldset>
-        <input type="radio" name="winner" id="player-1" value="{{ player.name }}">
-        {% include './playerselectdropdown.html' with select_id='player-select-1' %}
-        {% include './playerselectdropdown.html' with select_id='player-select-2' %}
-        <input type="radio" name="winner" id="player-2" value="{{ player.name }}">
-    </fieldset>
-<input type="submit" value="Add Game" class="button">
+    <input type="radio" name="winner" value="player_1"> <!-- Radio button for Player 1 -->
+    {{ form.player_1 }}
+    {{ form.player_2 }}
+    <input type="radio" name="winner" value="player_2"> <!-- Radio button for Player 2 -->
+    <br>
+    <input type="submit" value="Add Game" class="button">
+    {{ form.errors }}
 </form>
+
+<h2>Recently Added Games</h2>
+{% for game in last_five_games %}
+    {{ game }}
+    <br>
+{% endfor %}
 {% endblock %}
+

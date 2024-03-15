@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.utils import timezone
 from .models import Game, Player
 from datetime import datetime
 import calendar
-from .forms import NewPlayerForm
+from .forms import NewPlayerForm, NewGameForm
 
 def index(request):
-    current_month = datetime.now().strftime('%m')
+    current_month = timezone.now().strftime('%m')
 
     games_url = f'games/{current_month}/'
     league_url = f'leaguetable/{current_month}'
@@ -50,16 +50,8 @@ def games(request, month=None):
 
     games_in_month = Game.objects.filter(game_date__month=month).order_by("-game_date")
     players = Player.objects.all()
-    context = {
-        "games_list": games_in_month,
-        "players": players
-        }
 
-    return render(request, "pool/games.html", context)
-
-def add_games(request):
-    players = Player.objects.all()
-    return render(request, "pool/addgames.html", {"players": players})
+    return render(request, "pool/games.html", {"games_list": games_in_month, "players": players})
 
 def add_players(request):
 
@@ -73,9 +65,39 @@ def add_players(request):
         form = NewPlayerForm()
 
     players = Player.objects.all()
-    context = {
-        "players": players,
-        "form": form
-    }
-    return render(request,"pool/addplayers.html", context)
 
+    return render(request,"pool/addplayers.html", {"players": players, "form": form})
+
+def add_games(request):
+
+    if request.method == 'POST':
+        form = NewGameForm(request.POST)
+
+        if form.is_valid():
+            player_1 = form.cleaned_data['player_1']
+            player_2 = form.cleaned_data['player_2']
+            winner_rad = form.cleaned_data['winner']
+
+            if winner_rad == 'player_1':
+                winner = player_1
+            else:
+                winner = player_2
+
+            game = Game(player_1=player_1, player_2=player_2, winner=winner, game_date=timezone.now())
+            print(game)
+            game.save()
+            return redirect('add_games')
+
+    else:
+        form = NewGameForm()
+
+    last_five_games = Game.objects.order_by('-game_date')[:10]
+    players = Player.objects.all()
+
+    context = {
+        'form': form,
+        'players': players,
+        'last_five_games': last_five_games
+    }
+
+    return render(request, 'pool/addgames.html', context)
