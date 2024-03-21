@@ -84,20 +84,20 @@ def add_games(request):
                 winner = player_2
 
             game = Game(player_1=player_1, player_2=player_2, winner=winner, game_date=timezone.now())
-            print(game)
             game.save()
+
             return redirect('add_games')
 
     else:
         form = NewGameForm()
 
-    last_five_games = Game.objects.order_by('-game_date')[:10]
+    last_ten_games = Game.objects.order_by('-game_date')[:10]
     players = Player.objects.all()
 
     context = {
         'form': form,
         'players': players,
-        'last_five_games': last_five_games
+        'last_ten_games': last_ten_games
     }
 
     return render(request, 'pool/addgames.html', context)
